@@ -85,11 +85,6 @@ plt.show()
 cluster_summary = df_model.groupby('cluster')[target].value_counts(normalize=True).unstack()
 print("Recurrence distribution per cluster:\n", cluster_summary)
 
-
-
-
-
-
 # KEEP
 # Compute correlation matrix for numerical columns
 corr_matrix = df[continuous_vars].corr(method='spearman' )

@@ -46,6 +46,23 @@ print("Initial missing numerical values:\n", missing_info(df, numerical_cols))
 print("\nInitial missing categorical values:\n", missing_info(df, categorical_cols))
 
 # -------------------------------
+# Recurrence categorical cleanup
+# -------------------------------
+df.loc[df['recurrence'] == 0, 'recurrence_number'] = 0
+recurrence_cats = ['recurrence_surgery', 'recurrence_treatment', 'recurrence_dx', 'complete_macroscopic_resection']
+for col in recurrence_cats:
+    if col in df.columns:
+        df.loc[df['recurrence'] == 0, col] = -1
+
+# -------------------------------
+# Systemic treatment cleanup
+# -------------------------------
+if 'chemotherapy' in df.columns and 'systemic_treatment' in df.columns:
+    df.loc[df['chemotherapy'] == 0, 'systemic_treatment'] = -1
+
+print("Missing data after first cleanup",df.isna().sum())
+
+# -------------------------------
 # Drop numerical columns above 70% missing
 # -------------------------------
 threshold = 70
@@ -64,21 +81,6 @@ num_missing = missing_info(df, numerical_cols)
 num_to_impute = num_missing[num_missing['missing_pct'] < threshold].index.tolist()
 imputer = SimpleImputer(strategy='median')
 df[num_to_impute] = imputer.fit_transform(df[num_to_impute])
-
-# -------------------------------
-# Recurrence categorical cleanup
-# -------------------------------
-df.loc[df['recurrence'] == 0, 'recurrence_number'] = 0
-recurrence_cats = ['recurrence_surgery', 'recurrence_treatment', 'recurrence_dx', 'complete_macroscopic_resection']
-for col in recurrence_cats:
-    if col in df.columns:
-        df.loc[df['recurrence'] == 0, col] = -1
-
-# -------------------------------
-# Systemic treatment cleanup
-# -------------------------------
-if 'chemotherapy' in df.columns and 'systemic_treatment' in df.columns:
-    df.loc[df['chemotherapy'] == 0, 'systemic_treatment'] = -1
 
 # -------------------------------
 # Diagnosis date imputation
