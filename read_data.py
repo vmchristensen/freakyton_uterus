@@ -2,17 +2,19 @@ import pandas as pd
 
 file_path = r"C:\Users\nadine jager\Documents\hackathon\freakyton_uterus\IQ_Cancer_Endometrio_merged_NMSP.xlsx"
 
-import pandas as pd
+xls = pd.ExcelFile(file_path)
 
-file_path = r"C:\Users\nadine jager\Documents\hackathon\freakyton_uterus\IQ_Cancer_Endometrio_merged_NMSP.xlsx"
+sheets = {}
 
-# Read all sheets
-sheets = pd.read_excel(file_path, sheet_name=None)
+xls = pd.ExcelFile(file_path)
 
-# sheets is a dict: {sheet_name: DataFrame}
-print(sheets.keys())
+# List all sheet names
+print(xls.sheet_names)
 
-for name, df in sheets.items():
-    print(f"\n{name}")
-    print(df.shape)
-    print(df.columns)
+
+for sheet_name in xls.sheet_names:
+    sheets[sheet_name] = pd.read_excel(xls, sheet_name=sheet_name)
+
+df = sheets["IQ_Cancer_Endometrio_merged_NMS"]
+
+print(df.head())
