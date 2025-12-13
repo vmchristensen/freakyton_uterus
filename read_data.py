@@ -18,3 +18,5 @@ for sheet_name in xls.sheet_names:
 df = sheets["IQ_Cancer_Endometrio_merged_NMS"]
 
 print(df.head())
+
+df.to_csv(r"C:\Users\nadine jager\Documents\hackathon\freakyton_uterus\IQ_Cancer_Endometrio_merged_NMS.csv", index=False)
