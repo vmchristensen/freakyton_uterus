@@ -56,3 +56,12 @@ streamlit run model/app_preop.py
 - Survival Model: Cox Proportional Hazards Model (predicts time-to-RFS).
 
 All file paths within the Python scripts are configured using the os module (os.path.join(DATA_DIR, ...) and os.path.join(SCRIPT_DIR, ...)), making the project independent of the user's local directory structure.
+
+## 🌐 Live Application
+
+The calculator is implemented using *Streamlit* and runs entirely in the browser.
+
+▶️ *Access the app here:*  
+https://hacktheuterusvicnadu.streamlit.app/
+
+No installation required.
