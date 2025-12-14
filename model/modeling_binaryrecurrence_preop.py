@@ -152,8 +152,14 @@ print(results.groupby('Risk_Group')['Actual'].mean())
 
 # This saves the trained 'rf_model' to a file named 'nsmp_risk_model.pkl'
 # The file will appear in the same folder where your script is running
-model_filename = 'nsmp_recurrence_model_preop.pkl'
-joblib.dump(rf_model, model_filename)
+# 9. SAVE THE MODEL
 
-print(f"SUCCESS! Model saved as: {model_filename}")
+# This saves the trained 'rf_model' to a file named 'nsmp_recurrence_model_preop.pkl'
+model_filename = 'nsmp_recurrence_model_preop.pkl'
+
+# FIX: Use SCRIPT_DIR to save the file in the 'model' directory
+model_save_path = os.path.join(SCRIPT_DIR, model_filename)
+joblib.dump(rf_model, model_save_path)
+
+print(f"SUCCESS! Model saved as: {model_save_path}")
 print("You can now build the calculator app.")
